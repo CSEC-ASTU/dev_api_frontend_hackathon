@@ -46,7 +46,9 @@ function formSubmit(e) {
         'Content-Type': 'multipart/form-data'
         }
     }).then((response)=>{
-        $("#result").toggleClass("d-none");
+        if ($("#result").get(0).classList.contains("d-none")) {
+            $("#result").toggleClass("d-none");
+        }
         $("#number").text(response.data[0][1]);
     })
 }

@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+    <style type="text/css">
+      .as-console-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-height: 150px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        border-top: 1px solid #000;
+        display: none;
+      }
+      .as-console {
+        background: #e9e9e9;
+        border: 1px solid #ccc;
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .as-console-row {
+        display: table-row;
+        font-family: monospace;
+        font-size: 13px;
+      }
+      .as-console-row:after {
+        display: table-cell;
+        padding: 3px 6px;
+        color: rgba(0, 0, 0, 0.35);
+        border: 1px solid #ccc;
+        content: attr(data-date);
+        vertical-align: top;
+      }
+      .as-console-row + .as-console-row > * {
+        border: 1px solid #ccc;
+      }
+      .as-console-row-code {
+        width: 100%;
+        white-space: pre-wrap;
+        padding: 3px 5px;
+        display: table-cell;
+        font-family: monospace;
+        font-size: 13px;
+        vertical-align: middle;
+      }
+      .as-console-error:before {
+        content: "Error: ";
+        color: #f00;
+      }
+      .as-console-assert:before {
+        content: "Assertion failed: ";
+        color: #f00;
+      }
+      .as-console-info:before {
+        content: "Info: ";
+        color: #00f;
+      }
+      .as-console-warning:before {
+        content: "Warning: ";
+        color: #e90;
+      }
+      @-webkit-keyframes flash {
+        0% {
+          background: rgba(255, 240, 0, 0.25);
+        }
+        100% {
+          background: none;
+        }
+      }
+      @-moz-keyframes flash {
+        0% {
+          background: rgba(255, 240, 0, 0.25);
+        }
+        100% {
+          background: none;
+        }
+      }
+      @-ms-keyframes flash {
+        0% {
+          background: rgba(255, 240, 0, 0.25);
+        }
+        100% {
+          background: none;
+        }
+      }
+      @keyframes flash {
+        0% {
+          background: rgba(255, 240, 0, 0.25);
+        }
+        100% {
+          background: none;
+        }
+      }
+      .as-console-row-code,
+      .as-console-row:after {
+        -webkit-animation: flash 1s;
+        -moz-animation: flash 1s;
+        -ms-animation: flash 1s;
+        animation: flash 1s;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded text-light bg-dark" >
+      <a class="navbar-brand" href="#"><img src="images/logo.png" alt="CSEC-ASTU Geez digit recognition" style="height: 40px; border-radius: 50%; "></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-light" id="navbarsExample09">
+        <ul class="navbar-nav ml-auto text-light">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#image">Upload Image</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="canvas.html">Draw Number</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#footer">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <div class="d-flex flex-column align-items-center pt-3">
+      <h1>Draw Geez Number</h1>
+      <h1 id="result" class="d-none pb-3">The Number is <span id="number"></span></h1>
+      <canvas id="canvas" class="mb-5" width="500" height="500" style="border:2px solid black;"> </canvas>
+      <form>
+        <input
+        type="button"
+        id="reset"
+        value="Reset"
+        class="btn btn-danger"
+        />
+      </form>
+      <input type="button" name="Submit" class="btn btn-dark" value="Submit" id="Submit" onclick="submit()">
+      <script>
+        function submit() {
+          var canvas = $("#canvas")
+          var dataURL = canvas.get(0).toDataURL('image/jpeg', 1.0)
+          var blob = dataURItoBlob(dataURL)
+          var formData = new FormData();
+          const url = "http://192.168.0.66:4545/api/digit/recognition/"
+          formData.append('image', blob)
+          axios.post(url, formData, {
+              headers: {
+              'Content-Type': 'multipart/form-data'
+              }
+          }).then((response)=>{
+            if ($("#result").get(0).classList.contains("d-none")) {
+                $("#result").toggleClass("d-none");
+            }
+              $("#number").text(response.data[0][1]);
+              console.log(response);
+          })
+          function dataURItoBlob(dataURI) {
+            var byteString = atob(dataURI.split(',')[1]);
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) { ia[i] = byteString.charCodeAt(i); }
+            return new Blob([ab], { type: 'image/jpeg' });
+          }
+        }
+      </script>
+    </div>
+    <script src="canvas.js"></script>
+  </body>
+</html>

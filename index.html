@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="app.js"></script>
     <title>Title</title>
 </head>
@@ -30,18 +30,21 @@
         <div class="collapse navbar-collapse text-light" id="navbarsExample09">
           <ul class="navbar-nav ml-auto text-light">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="#image">Upload Image</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="canvas.html">Draw Number</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#footer">About</a>
             </li>
           </ul>
         </div>
       </nav>
-    <section class="top text-light d-flex align-items-end">
+    <section class="top text-light d-flex align-items-end" id="home">
 
           <div class="mb-5 ml-5 mr-auto overlay" >
               <h1>
@@ -56,16 +59,16 @@
           </div>
     </section>
 
-    <section class="text-dark d-flex align-items-end">
+    <section class="text-dark d-flex align-items-end" id="image">
         <div class="container py-5">
 
             <!-- For demo purpose -->
             <header class="text-dark text-center">
                 <h1 class="display-4">Upload your image here.</h1>
                 <p>or</p>
-                <button type="button" class="btn btn-dark text-large" data-toggle="modal" data-target="#exampleModalCenter">
+                <a href="indexs.html"  class="btn btn-dark text-large">
                     Draw
-                </button>
+                </a>
                 <div class="image-area mt-4" ><img id="imageResult"style="height: 250px;!important"  src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
             </header>
         
@@ -93,37 +96,10 @@
                     </form>
                 </div>
             </div>
-        </div>
-
-        <!-- Button trigger modal -->
-        
-        
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" style="height: 500px; width: 500px;">
-                    Not finished yet
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        
-        
+        </div> 
     </section>    
 
-    <section class="footer text-light d-flex justify-start">
+    <section class="footer text-light d-flex justify-start" id="footer">
         <div class="title d-flex align-center" style="height: 20vh;">
             <img src="images/logo.png" alt="CSEC-ASTU Geez digit recognition" style="height: 50%; border-radius: 50%; padding: 25px;">
             <p>CSEC-ASTU</p>
@@ -155,61 +131,7 @@
         </div>
     </section>
 
-    <script>
-        (function() {
-	var canvas = document.querySelector('#paint');
-	var ctx = canvas.getContext('2d');
-	
-	var sketch = document.querySelector('#sketch');
-	var sketch_style = getComputedStyle(sketch);
-	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
-	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
-
-	var mouse = {x: 0, y: 0};
-	var last_mouse = {x: 0, y: 0};
-	
-	/* Mouse Capturing Work */
-	canvas.addEventListener('mousemove', function(e) {
-		last_mouse.x = mouse.x;
-		last_mouse.y = mouse.y;
-		
-		mouse.x = e.pageX - this.offsetLeft;
-		mouse.y = e.pageY - this.offsetTop;
-	}, false);
-	
-	
-	/* Drawing on Paint App */
-	ctx.lineWidth = 5;
-	ctx.lineJoin = 'round';
-	ctx.lineCap = 'round';
-	ctx.strokeStyle = 'red';
-	
-	canvas.addEventListener('mousedown', function(e) {
-		canvas.addEventListener('mousemove', onPaint, false);
-	}, false);
-	
-	canvas.addEventListener('mouseup', function() {
-		canvas.removeEventListener('mousemove', onPaint, false);
-	}, false);
-	
-	var onPaint = function() {
-		ctx.beginPath();
-		ctx.moveTo(last_mouse.x, last_mouse.y);
-		ctx.lineTo(mouse.x, mouse.y);
-		ctx.closePath();
-		ctx.stroke();
-	};
-	
-}());
-
-
-    </script>
-    <style>
-        #paint {
-	border: 10px solid gray;
-	height: 100%;
-}
-    </style>
+    <script src="canvas.js"></script>
 </body>
 
 </html>
