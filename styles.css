@@ -1,0 +1,137 @@
+#upload {
+    opacity: 0;
+}
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: 'Uploaded image result';
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+}
+
+body{
+    margin: 0%;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.navbar {
+    height: 8vh;
+}
+
+.top{
+    height: 92vh;
+    margin: 0%;
+    padding: 0;
+    background-image: url("images/bg.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, .6);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.footer{
+    height: 50vh;
+    background-color: black;
+}
+
+.text-light{
+    color: white;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.justify-start{
+    justify-content: start;
+}
+
+.foot{
+    align-self: flex-end;
+    margin: 2rem;
+    justify-self: start;
+    position: absolute;
+}
+
+ul{
+    list-style: none;
+    margin: 0%;
+    padding: 0%;
+}
+
+.links a{
+    text-decoration: none;
+    color: white;
+}
+
+.body{
+    position: absolute;
+    align-self: center;
+    justify-content: space-evenly;
+}
+
+.body .links{
+    margin: 0%;
+    margin-right: 50px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.links p{
+    font-weight: bold;
+}
+
+.links ul{
+    justify-self: center;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+a{
+    color: white!important;
+}
